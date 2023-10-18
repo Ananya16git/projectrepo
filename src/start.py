@@ -21,7 +21,7 @@ def main():
 
     # Check if input and output folders exist
     checkInOut = CheckInOutFolder(input_filepath, output_filepath)
-    checkInOut.Check_filepath()
+    checkInOut.check_filepaths()
 
     # Handle JSON files
     jsonfile = JsonFile(input_filepath)

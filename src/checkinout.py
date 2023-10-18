@@ -1,56 +1,47 @@
-import os
 import sys
+import os
+
 class CheckInOutFolder:
     """
-    A class for checking the existence of input and output folders.
+    A class for checking the existence of input and output file paths.
 
-    Args:
-        input_filepath (str): The path to the input JSON folder.
-        output_filepath (str): The path to the output CSV folder.
+    This class provides methods to check if the specified input and output file
+    paths exist. If a file path does not exist, it raises an OSError and provides
+    an error message.
 
-    Attributes:
-        input_filepath (str): The path to the input JSON folder.
-        output_filepath (str): The path to the output CSV folder.
-
-    Methods:
-        Check_filepath(): Checks if the input and output folders exist.
-
-    Example:
-        # Create a CheckInOutFolder instance and check folder existence
-        folder_checker = CheckInOutFolder("input_directory", "output_directory")
-        folder_checker.Check_filepath()
+    :param input_filepath: The path to the input file.
+    :type input_filepath: str
+    :param output_filepath: The path to the output file.
+    :type output_filepath: str
     """
+
     def __init__(self, input_filepath: str, output_filepath: str):
+        """
+        Initialize a new CheckInOutFolder instance with input and output file paths.
+
+        :param input_filepath: The path to the input file.
+        :type input_filepath: str
+        :param output_filepath: The path to the output file.
+        :type output_filepath: str
+        """
         self.input_filepath = input_filepath
         self.output_filepath = output_filepath
 
-    def Check_filepath(self):
+    def check_filepaths(self):
         """
-        Checks if the input and output folders exist.
+        Check the existence of input and output file paths.
 
-        If the input folder exists, it sets 'input_filepath_found' to True and prints a success message.
-        If the input folder does not exist, it sets 'input_filepath_found' to False and prints an error message,
-        prompting the user to rerun the code with the correct path.
-
-        If the output folder exists, it sets 'output_filepath_found' to True and prints a success message.
-        If the output folder does not exist, it sets 'output_filepath_found' to False and prints an error message,
-        prompting the user to rerun the code with the correct path.
-
-        Returns:
-            None
+        This method checks if the specified input and output file paths exist.
+        If either file path does not exist, it raises an OSError and provides
+        an error message.
         """
-        if os.path.exists(self.input_filepath):
-            input_filepath_found = True
-            print("Input JSON folder found")
-        else:
-            input_filepath_found = False
-            print("Input JSON folder is not found, rerun the code and enter the correct path")
-            sys.exit()
+        if not os.path.exists(self.input_filepath):
+            print(f"Unable to open {self.input_filepath}")
+            raise OSError(f"Unable to open: {self.input_filepath}")
 
-        if os.path.exists(self.output_filepath):
-            output_filepath_found = True
-            print("Output CSV folder is found")
-        else:
-            output_filepath_found = False
-            print("Output folder is not found, rerun the code and enter the correct path")
-            sys.exit()
+        if not os.path.exists(self.output_filepath):
+            print(f"Unable to open {self.output_filepath}")
+            raise OSError(f"Unable to open: {self.output_filepath}")
+
+
+
