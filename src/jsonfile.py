@@ -1,6 +1,8 @@
 import os
 import json
+import sys
 from json import JSONDecodeError
+
 
 class JsonFile:
         """
@@ -49,11 +51,15 @@ class JsonFile:
                 list: A list of JSON file names in the input folder.
             """
             input_files = [file_name for file_name in os.listdir(self.input_filepath) if file_name.endswith(".json")]
-            return input_files
+            if input_files:
+                return input_files
+            else:
+                print(f"No Json file found {self.input_filepath}")
+                raise IndexError
 
         def Check_json(self, input_files: list) -> list:
             """
-            Checks and returns valid JSON files from the input folder.
+            Checks and returns name of valid JSON files from the input folder.
 
             Args:
                 input_files (list): A list of JSON file names.
@@ -69,7 +75,11 @@ class JsonFile:
                         valid_input_files.append(input_file)
                 except JSONDecodeError:
                     print(f"{input_file} is invalid")
-            return valid_input_files
+            if valid_input_files:
+                return valid_input_files
+            else:
+                print(f"No valid Json file found {self.input_filepath}")
+                raise IndexError
 
         def Check_header(self, valid_input_files: list) -> list:
             """
